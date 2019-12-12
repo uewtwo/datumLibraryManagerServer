@@ -1,0 +1,13 @@
+version: '3'
+services:
+  app:
+    container_name: dlm-appserver
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    command: go run main.go
+    volumes:
+      - ./app:/app
+    ports:
+      - 8080:8080
+

@@ -1,0 +1,33 @@
+version: '3'
+services:
+  app:
+    container_name: dlm-appserver
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    command: go run main.go
+    volumes:
+      - ./app:/app
+    ports:
+      - 8080:8080
+    depends_on:
+      - 'db'
+  db:
+    congtainer_name: dlm-db
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: dlmspassword
+      MYSQL_DATABASE: datumlibrary_manager
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    volumes:
+      - ./db/data:/var/lib/mysql
+      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
+
