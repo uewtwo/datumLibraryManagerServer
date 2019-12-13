@@ -5,15 +5,16 @@ services:
     build:
       context: ./app
       dockerfile: Dockerfile
-    command: go run main.go
+    working_dir: /app
+    command: realize start --run --no-config
     volumes:
       - ./app:/app
     ports:
       - 8080:8080
-    depends_on:
+    links:
       - 'db'
   db:
-    congtainer_name: dlm-db
+    container_name: dlm-db
     build:
       context: ./db
       dockerfile: Dockerfile
