@@ -18,17 +18,21 @@ services:
     build:
       context: ./db
       dockerfile: Dockerfile
-    restart: always
     ports:
       - 3307:3306
     environment:
-      MYSQL_ROOT_PASSWORD: dlmspassword
-      MYSQL_DATABASE: datumlibrary_manager
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: library_manager
       MYSQL_USER: docker
       MYSQL_PASSWORD: docker
       TZ: 'Asia/Tokyo'
     command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
     volumes:
+      - db-store:/var/lib/mysql
+      - ./db/logs:/var/log/mysql
       - ./db/data:/var/lib/mysql
       - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
+
+volumes:
+  db-store:
 

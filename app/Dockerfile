@@ -5,11 +5,11 @@ ENV PATH $PATH:$GOPATH/bin
 
 RUN mkdir -p /go/app
 WORKDIR /go/app
-ENV GO111MODULE=on
 
 COPY . .
 
-RUN go get github.com/labstack/echo \
-      github.com/oxequa/realize \
-  && go build -o app
+RUN set -ex && \
+  go get github.com/labstack/echo && \
+  go get github.com/oxequa/realize && \
+  go build -o app
 
