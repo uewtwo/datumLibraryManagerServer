@@ -3,14 +3,15 @@ services:
   app:
     container_name: dlm-appserver
     build:
-      context: ./app
+      context: ./app/datum-library-manager-server
       dockerfile: Dockerfile
-    working_dir: /app
-    command: realize start --run --no-config
+    working_dir: /app/datum-library-manager-server
+    command: realize start --run 
     volumes:
       - ./app:/app
     ports:
       - 8080:8080
+      - 5002:5002
     links:
       - 'db'
   db:
