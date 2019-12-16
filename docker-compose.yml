@@ -5,10 +5,10 @@ services:
     build:
       context: ./app/datum-library-manager-server
       dockerfile: Dockerfile
-    working_dir: /app/datum-library-manager-server
-    command: realize start --run 
+    working_dir: /go/src/datum-library-manager-server/
+    command: realize start --run --server
     volumes:
-      - ./app:/app
+      - ./app/datum-library-manager-server:/go/src/datum-library-manager-server
     ports:
       - 8080:8080
       - 5002:5002

@@ -16,12 +16,10 @@ schema:
   watcher:
     extensions:
     - go
-    - html
-    - yml
-    - yaml
     paths:
     - /
-    ignored_paths:
-    - .git
-    - .realize
-    - vendor
+    ignore:
+      paths:
+      - .git
+      - .realize
+      - vendor
